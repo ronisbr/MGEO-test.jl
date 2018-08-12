@@ -69,7 +69,7 @@ function mgeo_run(mgeod::MGEO_Structure{Nv, Nf, Design_Variable_MGEO_Real},
     @inbounds for run = 1:mgeod.run_max
         # Sample a new population using a uniform distribution between the
         # minimum and maximum allowed range for each design variable.
-        vars = Vector(map(x->x.min + rand()*(x.max-x.min), mgeod.design_vars))
+        vars = map(x->x.min + rand()*(x.max-x.min), mgeod.design_vars)
 
         # Call the objective functions.
         (valid, f) = f_obj(vars)
@@ -103,7 +103,7 @@ function mgeo_run(mgeod::MGEO_Structure{Nv, Nf, Design_Variable_MGEO_Real},
 
         # Sample a new string if it is not the first run.
         if run > 1
-            vars = Vector(map(x->x.min + rand()*(x.max-x.min), mgeod.design_vars))
+            vars = map(x->x.min + rand()*(x.max-x.min), mgeod.design_vars)
         end
 
         # Loop - MGEO Generations
